@@ -3,6 +3,7 @@
 **English** · [中文](README.zh.md)
 
 Reusable Agent Skills for single-page SEO auditing — Basic and Full tiers.  
+
 Works with Claude, Cursor, and OpenClaw.
 
 ---
