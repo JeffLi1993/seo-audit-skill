@@ -357,8 +357,9 @@
       {{site_checks_html}}
       <!--
         Expected format for site_checks_html:
-        - Pass rows: use <div class="detail-issue"> only.
-        - Fail / Warn rows: use both <div class="detail-issue"> and <div class="detail-fix">.
+        - Pass rows: ONE short phrase. No lists, no background. Badge already says it passed.
+        - Warn / Fail rows: <div class="detail-issue"> with ≤2 bullet points.
+                            <div class="detail-fix"> with the fix. No SEO 101 explanations.
 
         <table class="check-table">
           <thead>
@@ -366,26 +367,29 @@
           </thead>
           <tbody>
             <tr>
+              <td>robots.txt</td>
+              <td><span class="status status-pass">Pass</span></td>
+              <td>User-Agent: * / Allow: / · Sitemap directive present · Googlebot not blocked.</td>
+            </tr>
+            <tr>
               <td>sitemap.xml</td>
               <td><span class="status status-pass">Pass</span></td>
-              <td>
-                <div class="detail-issue">Found at /sitemap.xml — 142 URLs listed.</div>
-              </td>
+              <td>Valid XML urlset · 104 URLs · referenced in robots.txt.</td>
             </tr>
             <tr>
               <td>robots.txt</td>
               <td><span class="status status-warn">Warning</span></td>
               <td>
-                <div class="detail-issue">File found but no Sitemap: directive present. Crawlers cannot auto-discover the sitemap from robots.txt.</div>
-                <div class="detail-fix">Add "Sitemap: https://example.com/sitemap.xml" to robots.txt.</div>
+                <div class="detail-issue">· No Sitemap: directive — crawlers cannot auto-discover sitemap.</div>
+                <div class="detail-fix">Add: Sitemap: https://example.com/sitemap.xml</div>
               </td>
             </tr>
             <tr>
               <td>sitemap.xml</td>
               <td><span class="status status-fail">Fail</span></td>
               <td>
-                <div class="detail-issue">HTTP 200 returned but body is HTML, not valid XML. Google cannot parse this as a sitemap.</div>
-                <div class="detail-fix">Create a valid XML sitemap at /sitemap.xml using the sitemaps.org protocol. Submit it in Google Search Console.</div>
+                <div class="detail-issue">· HTTP 200 but body is HTML, not valid XML — Google cannot parse it.</div>
+                <div class="detail-fix">Generate a valid XML sitemap and submit via Google Search Console.</div>
               </td>
             </tr>
           </tbody>
@@ -401,8 +405,10 @@
       {{page_checks_html}}
       <!--
         Expected format for page_checks_html:
-        - Pass rows: use <div class="detail-issue"> only.
-        - Fail / Warn rows: use both <div class="detail-issue"> and <div class="detail-fix">.
+        - Pass rows: ONE short phrase. No div wrappers needed. Badge already says it passed.
+        - Warn / Fail rows: <div class="detail-issue"> with ≤2 bullet points (lead with "·").
+                            <div class="detail-fix"> with the fix. No SEO 101 explanations.
+        - N/A rows: one short phrase explaining why check was skipped.
 
         <table class="check-table">
           <thead>
@@ -410,42 +416,61 @@
           </thead>
           <tbody>
             <tr>
-              <td>H1 Tag</td>
+              <td>URL Slug</td>
               <td><span class="status status-pass">Pass</span></td>
+              <td>/blog/best-running-shoes · lowercase, hyphenated, keyword present.</td>
+            </tr>
+            <tr>
+              <td>URL Slug</td>
+              <td><span class="status status-warn">Warning</span></td>
               <td>
-                <div class="detail-issue">Single H1 found: "Best Running Shoes 2025".</div>
+                <div class="detail-issue">· /the-best-and-most-popular-running-shoes-of-2025 — stop words (the, and, of) + overly long.</div>
+                <div class="detail-fix">Simplify: /running-shoes or /blog/running-shoes</div>
               </td>
             </tr>
             <tr>
-              <td>H1 Tag</td>
-              <td><span class="status status-fail">Fail</span></td>
-              <td>
-                <div class="detail-issue">3 H1 tags found: "Home", "Welcome", "Our Products". Multiple H1s dilute heading hierarchy and confuse crawlers about the primary topic.</div>
-                <div class="detail-fix">Keep exactly one H1. Include the primary keyword or a natural variant. Demote remaining headings to H2.</div>
-              </td>
+              <td>URL Slug</td>
+              <td><span class="status status-na">N/A</span></td>
+              <td>Homepage — slug check not applicable.</td>
             </tr>
             <tr>
               <td>Title Tag</td>
               <td><span class="status status-warn">Warning</span></td>
               <td>
-                <div class="detail-issue">Title is 78 characters — exceeds the 60-char recommendation and may be truncated in SERPs.</div>
-                <div class="detail-fix">Shorten to 50–60 characters. Lead with the primary keyword. Remove filler words or redundant brand suffixes.</div>
+                <div class="detail-issue">· 78 chars — may truncate in SERPs. · Keyword not at start.</div>
+                <div class="detail-fix">Shorten to 50–60 chars, lead with primary keyword.</div>
               </td>
+            </tr>
+            <tr>
+              <td>Meta Description</td>
+              <td><span class="status status-pass">Pass</span></td>
+              <td>153 chars · keyword present · specific and non-generic.</td>
             </tr>
             <tr>
               <td>Meta Description</td>
               <td><span class="status status-warn">Warning</span></td>
               <td>
-                <div class="detail-issue">Present but only 95 characters — below the 120-char minimum. Google may auto-generate a less relevant snippet.</div>
-                <div class="detail-fix">Expand to 120–160 characters. Summarize the page value and include a natural call to action.</div>
+                <div class="detail-issue">· 95 chars — below 120 minimum.</div>
+                <div class="detail-fix">Expand to 120–160 chars with a concrete value statement.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>H1 Tag</td>
+              <td><span class="status status-pass">Pass</span></td>
+              <td>Single H1 · "Best Running Shoes 2025" · keyword present.</td>
+            </tr>
+            <tr>
+              <td>H1 Tag</td>
+              <td><span class="status status-fail">Fail</span></td>
+              <td>
+                <div class="detail-issue">· 3 H1 tags found: "Home", "Welcome", "Our Products".</div>
+                <div class="detail-fix">Keep one H1 with the primary keyword. Demote others to H2.</div>
               </td>
             </tr>
             <tr>
               <td>Canonical Tag</td>
               <td><span class="status status-pass">Pass</span></td>
-              <td>
-                <div class="detail-issue">Self-referencing canonical present.</div>
-              </td>
+              <td>Self-referencing canonical present.</td>
             </tr>
           </tbody>
         </table>

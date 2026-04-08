@@ -20,6 +20,35 @@ This document provides detailed field definitions, audit scope, edge case guidan
 
 ---
 
+## Script + LLM Division of Responsibility
+
+The `check-page.py` script uses a **two-layer design** for H1 keyword analysis:
+
+| Layer | Who | What |
+|---|---|---|
+| Layer 1 | Script | Mechanical checks: uniqueness, length, full/partial/no string match |
+| Layer 2 | Agent (LLM) | Semantic judgment: does H1 cover the keyword's search intent? |
+
+**When `h1.llm_review_required == true`:**
+The script found a partial string match (e.g. keyword = "AI computer", H1 = "Best Personal AI").
+It cannot determine if this qualifies as a valid natural variant — that requires language understanding.
+The agent must read `h1.values[0]` + the keyword and judge:
+
+- Does the H1 semantically cover the keyword's search intent?
+- Would a user searching for this keyword consider this H1 relevant?
+- Is this a natural variant (acceptable) or a keyword gap (needs fix)?
+
+**`keyword_match` field values:**
+
+| Value | Meaning | LLM action required |
+|---|---|---|
+| `"full"` | Keyword string found verbatim in H1 | None |
+| `"partial"` | At least one keyword word (>3 chars) found | Yes — semantic judgment |
+| `"none"` | No keyword words found | None — flag as missing |
+| `"unverified"` | No `--keyword` passed | None — note as unverified |
+
+---
+
 ## Audit Scope — What Basic Report Checks
 
 ### Site-Level Checks
