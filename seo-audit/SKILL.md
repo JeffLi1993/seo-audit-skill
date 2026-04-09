@@ -48,11 +48,25 @@ If only a URL is provided and no source code or crawler data is available, clear
 
 ## Output
 
-Produce a **Basic SEO Audit Report** structured around the findings defined in [references/REFERENCE.md](references/REFERENCE.md).
+Produce a **Basic SEO Audit Report** by filling the template at [assets/report-template.html](assets/report-template.html),
+then **save it to a file — never print raw HTML to the terminal**.
 
-Default output format: render the final report using the template at [assets/report-template.html](assets/report-template.html).
+**File naming:** `reports/<hostname>-<slug>-audit.html`
+```
+https://example.com/blog/best-tools → reports/example-com-blog-best-tools-audit.html
+https://example.com/                → reports/example-com-audit.html
+```
 
-The Executive Summary section uses three separate placeholders — fill each independently:
+**After saving, tell the user:**
+```
+✅ Report saved → reports/example-com-audit.html
+   Open it now? (yes / no)
+```
+If yes → run: `open reports/example-com-audit.html`
+
+---
+
+**Template placeholders** — fill each independently:
 
 | Placeholder | Content |
 |---|---|
@@ -60,8 +74,6 @@ The Executive Summary section uses three separate placeholders — fill each ind
 | `{{summary_critical_html}}` | `<li>` per critical (fail) item, or `<li class="summary-empty">None</li>` |
 | `{{summary_warnings_html}}` | `<li>` per warning item, or `<li class="summary-empty">None</li>` |
 | `{{summary_passing_html}}` | `<li>` per passing check, or `<li class="summary-empty">None</li>` |
-
-If HTML output is not appropriate for the context, output a well-structured Markdown summary instead.
 
 ---
 
