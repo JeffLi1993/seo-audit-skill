@@ -98,10 +98,27 @@ python scripts/fetch-page.py https://example.com --output page.html
 
 Each script exits with code `0` (all pass/warn) or `1` (any fail/error).
 
+**STRICT SCOPE — do not add any check not listed below. No exceptions.**
+
+Allowed site-level checks (in `{{site_checks_html}}`):
+- robots.txt · sitemap.xml · 404 Handling · URL Canonicalization · i18n / hreflang · Schema (JSON-LD)
+
+Allowed E-E-A-T checks (in `{{eeat_checks_html}}`):
+- About Us · Contact · Privacy Policy · Terms of Service · Media/Partners (only if present)
+
+Allowed page-level checks (in `{{page_checks_html}}`):
+- URL Slug · Title Tag · Meta Description · H1 Tag · Canonical Tag
+
+Do NOT add: Image Alt Text, OG tags, Robots Meta, Page Weight, Core Web Vitals,
+heading hierarchy, content quality, or any other check — those belong to `seo-audit-full`.
+
 **How to use the JSON output:**
 - Map each field's `status` → `pass` / `warn` / `fail` / `error` directly to the report check table
 - Use each field's `detail` string as the starting point for the Evidence line in findings
 - Do not contradict the script output unless you have additional observable evidence
+- Separate check groups with `<div class="subsection-label">Label</div>` inside `{{site_checks_html}}`:
+  `Crawlability` · `URL Canonicalization` · `i18n / hreflang` · `Schema (JSON-LD)`
+  and `<div class="subsection-label">E-E-A-T Trust Pages</div>` before `{{eeat_checks_html}}`
 
 **LLM review — mandatory when `llm_review_required: true`:**
 

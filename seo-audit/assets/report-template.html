@@ -257,6 +257,19 @@
     }
     ol.priority-list li { margin-bottom: 6px; }
 
+    /* ── Sub-section label (within Site Checks) ── */
+    .subsection-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      padding: 18px 0 8px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid #ebebeb;
+    }
+    .subsection-label:first-child { padding-top: 0; }
+
     /* ── Limitations ── */
 
     /* ── Upgrade prompt ── */
@@ -355,9 +368,11 @@
     <h2>Site Checks</h2>
     <div class="section-body">
 
-      <!-- Crawlability: robots.txt + sitemap.xml -->
+      <!-- Crawlability + Canonicalization + i18n + Schema -->
       {{site_checks_html}}
       <!--
+        Use <div class="subsection-label">Label</div> to separate check groups.
+        Labels: Crawlability · URL Canonicalization · i18n / hreflang · Schema (JSON-LD)
         Pass rows: ONE short phrase. No divs.
         Warn / Fail rows: <div class="detail-issue"> ≤2 points + <div class="detail-fix">.
 
@@ -528,6 +543,7 @@
       <!-- E-E-A-T Infrastructure: trust pages existence + reachability -->
       {{eeat_checks_html}}
       <!--
+        Start with: <div class="subsection-label">E-E-A-T Trust Pages</div>
         Two layers per trust page:
           Layer 1 — Exists     : HTTP 200 = pass, 404/redirect = fail
           Layer 2 — Reachable  : linked from footer or main nav = pass, not linked = warn
