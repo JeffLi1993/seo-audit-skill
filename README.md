@@ -27,7 +27,7 @@ audit this page: https://openclaw.ai
 
 | Website | Audit Summary | Site Checks | Page Checks & insights |
 |---|---|---|---|
-| colaos.ai <br><small><code>reports/colaos-ai-audit.html</code></small> | <img src="assets/0-0.png" alt="Audit Summary" width="240" /> | <img src="assets/0-1.png" alt="Site Checks" width="240" /> | <img src="assets/0-2.png" alt="Page Checks and insights" width="240" /> |
+| colaos.ai | <img src="assets/0-0.png" alt="Audit Summary" width="240" /> | <img src="assets/0-1.png" alt="Site Checks" width="240" /> | <img src="assets/0-2.png" alt="Page Checks and insights" width="240" /> |
 
 ---
 
