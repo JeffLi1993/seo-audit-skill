@@ -21,9 +21,17 @@
 | **Insight Walkthrough** | 每个重要发现的 Evidence → Impact → Fix |
 
 ```
-audit this page: https://tapvid.ai
-→ ✅ Report saved → reports/tapvid-ai-audit.html
+audit this page: https://openclaw.ai
+→ ✅ Report saved → reports/openclaw-ai-audit.html
 ```
+
+**示例 — colaos.ai**（报告：`reports/colaos-ai-audit.html`）
+
+| # | 对应区块 | 效果图 |
+|---|----------|--------|
+| 1 | **Audit Summary** | <img src="assets/0-0.png" alt="审计摘要" width="720" /> |
+| 2 | **Site Checks** | <img src="assets/0-1.png" alt="站点检查" width="720" /> |
+| 3 | **Page Checks & 洞察** | <img src="assets/0-2.png" alt="页面检查" width="720" /> |
 
 ---
 
